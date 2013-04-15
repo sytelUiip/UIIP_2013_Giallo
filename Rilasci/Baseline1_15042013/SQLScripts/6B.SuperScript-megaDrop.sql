@@ -1,0 +1,14 @@
+DROP TABLE editoria_gruppo_giallo.appartenenza_gruppo;
+DROP TABLE editoria_gruppo_giallo.funzionalita;
+DROP TABLE editoria_gruppo_giallo.gestione_notizia;
+DROP TABLE editoria_gruppo_giallo.notizia;
+DROP TABLE editoria_gruppo_giallo.account;
+DROP TABLE editoria_gruppo_giallo.gruppo;
+
+
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_account;
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_gruppo;
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_appartenenza_gruppo;
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_funzionalita;
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_notizia;
+DROP SEQUENCE editoria_gruppo_giallo.seq_id_gestione_notizia;
