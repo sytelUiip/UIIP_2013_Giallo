@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;it.gruppogioallo.visualizzalistaaccount&apos; to &apos;it.gruppogiallo.visualizzalistaaccount&apos;&#x0D;&#x0A;- Original project: &apos;UserInterface&apos;&#x0D;&#x0A;- Original element: &apos;UserInterface/src/it.gruppogioallo.visualizzalistaaccount&apos;&#x0D;&#x0A;- Renamed element: &apos;UserInterface/src/it.gruppogiallo.visualizzalistaaccount&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;it.gruppogioallo.visualizzalistaaccount&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;it.gruppogioallo.visualizzalistaaccount" name="it.gruppogiallo.visualizzalistaaccount" qualified="false" references="true" stamp="1366061670247" textual="false" version="1.0"/>
-</session>

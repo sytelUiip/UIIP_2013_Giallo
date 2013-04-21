@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;nome_gruppo&apos; in &apos;it.gruppogiallo.entity.Gruppo&apos; to &apos;nomeGruppo&apos;&#x0D;&#x0A;- Original project: &apos;DataTransfertObject&apos;&#x0D;&#x0A;- Original element: &apos;it.gruppogiallo.entity.Gruppo.nome_gruppo&apos;&#x0D;&#x0A;- Renamed element: &apos;it.gruppogiallo.entity.Gruppo.nomeGruppo&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;nome_gruppo&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;it.gruppogiallo.entity{Gruppo.java[Gruppo^nome_gruppo" name="nomeGruppo" references="true" setter="false" stamp="1366058857242" textual="false" version="1.0"/>
-</session>
