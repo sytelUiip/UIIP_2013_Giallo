@@ -1,4 +1,0 @@
-INDEX VERSION 1.122+D:\GitHub\UIIP_2013_Giallo\workspace_projectwork_gruppo_giallo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2150997412.index
-513015553.index
-3196713094.index
