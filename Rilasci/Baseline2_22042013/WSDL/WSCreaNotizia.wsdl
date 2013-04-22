@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://creazionenotizia.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://creazionenotizia.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://creazionenotizia.gruppogiallo.it">
+            <xs:element name="creaNotizia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="sottotitolo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="tipologiaNotizia" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="autore" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="testo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="creaNotiziaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="creaNotiziaRequest">
+        <wsdl:part name="parameters" element="ns:creaNotizia"/>
+    </wsdl:message>
+    <wsdl:message name="creaNotiziaResponse">
+        <wsdl:part name="parameters" element="ns:creaNotiziaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSCreaNotiziaPortType">
+        <wsdl:operation name="creaNotizia">
+            <wsdl:input message="ns:creaNotiziaRequest" wsaw:Action="urn:creaNotizia"/>
+            <wsdl:output message="ns:creaNotiziaResponse" wsaw:Action="urn:creaNotiziaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSCreaNotiziaSoap11Binding" type="ns:WSCreaNotiziaPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="creaNotizia">
+            <soap:operation soapAction="urn:creaNotizia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSCreaNotiziaSoap12Binding" type="ns:WSCreaNotiziaPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="creaNotizia">
+            <soap12:operation soapAction="urn:creaNotizia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSCreaNotiziaHttpBinding" type="ns:WSCreaNotiziaPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="creaNotizia">
+            <http:operation location="creaNotizia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSCreaNotizia">
+        <wsdl:port name="WSCreaNotiziaHttpSoap11Endpoint" binding="ns:WSCreaNotiziaSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSCreaNotizia.WSCreaNotiziaHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSCreaNotiziaHttpSoap12Endpoint" binding="ns:WSCreaNotiziaSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSCreaNotizia.WSCreaNotiziaHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSCreaNotiziaHttpEndpoint" binding="ns:WSCreaNotiziaHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSCreaNotizia.WSCreaNotiziaHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
