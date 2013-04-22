@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://moificaaccount.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://moificaaccount.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://moificaaccount.gruppogiallo.it">
+            <xs:element name="modificaAccount">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="cognome" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="siglaRedazione" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="siglaGiornalista" nillable="true" type="xs:string"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="gruppi" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modificaAccountResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="modificaAccountRequest">
+        <wsdl:part name="parameters" element="ns:modificaAccount"/>
+    </wsdl:message>
+    <wsdl:message name="modificaAccountResponse">
+        <wsdl:part name="parameters" element="ns:modificaAccountResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSModificaAccountPortType">
+        <wsdl:operation name="modificaAccount">
+            <wsdl:input message="ns:modificaAccountRequest" wsaw:Action="urn:modificaAccount"/>
+            <wsdl:output message="ns:modificaAccountResponse" wsaw:Action="urn:modificaAccountResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSModificaAccountSoap11Binding" type="ns:WSModificaAccountPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="modificaAccount">
+            <soap:operation soapAction="urn:modificaAccount" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSModificaAccountSoap12Binding" type="ns:WSModificaAccountPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="modificaAccount">
+            <soap12:operation soapAction="urn:modificaAccount" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSModificaAccountHttpBinding" type="ns:WSModificaAccountPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="modificaAccount">
+            <http:operation location="modificaAccount"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSModificaAccount">
+        <wsdl:port name="WSModificaAccountHttpSoap11Endpoint" binding="ns:WSModificaAccountSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSModificaAccount.WSModificaAccountHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSModificaAccountHttpSoap12Endpoint" binding="ns:WSModificaAccountSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSModificaAccount.WSModificaAccountHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSModificaAccountHttpEndpoint" binding="ns:WSModificaAccountHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSModificaAccount.WSModificaAccountHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
