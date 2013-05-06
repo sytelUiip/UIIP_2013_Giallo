@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://registranotizia.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://registranotizia.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://registranotizia.gruppogiallo.it">
+            <xs:element name="registraNotizia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
+                        <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="sottotitolo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="tipologiaNotizia" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="testo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="registraNotiziaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="registraNotiziaRequest">
+        <wsdl:part name="parameters" element="ns:registraNotizia"/>
+    </wsdl:message>
+    <wsdl:message name="registraNotiziaResponse">
+        <wsdl:part name="parameters" element="ns:registraNotiziaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSRegistraNotiziaPortType">
+        <wsdl:operation name="registraNotizia">
+            <wsdl:input message="ns:registraNotiziaRequest" wsaw:Action="urn:registraNotizia"/>
+            <wsdl:output message="ns:registraNotiziaResponse" wsaw:Action="urn:registraNotiziaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSRegistraNotiziaSoap11Binding" type="ns:WSRegistraNotiziaPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="registraNotizia">
+            <soap:operation soapAction="urn:registraNotizia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSRegistraNotiziaSoap12Binding" type="ns:WSRegistraNotiziaPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="registraNotizia">
+            <soap12:operation soapAction="urn:registraNotizia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSRegistraNotiziaHttpBinding" type="ns:WSRegistraNotiziaPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="registraNotizia">
+            <http:operation location="registraNotizia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSRegistraNotizia">
+        <wsdl:port name="WSRegistraNotiziaHttpSoap11Endpoint" binding="ns:WSRegistraNotiziaSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSRegistraNotizia.WSRegistraNotiziaHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSRegistraNotiziaHttpSoap12Endpoint" binding="ns:WSRegistraNotiziaSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSRegistraNotizia.WSRegistraNotiziaHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSRegistraNotiziaHttpEndpoint" binding="ns:WSRegistraNotiziaHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSRegistraNotizia.WSRegistraNotiziaHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
