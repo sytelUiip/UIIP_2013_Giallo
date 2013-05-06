@@ -9,3 +9,4 @@ In questa fase sono state rilasciate le seguenti cartelle:
 - Web_Server: contenente il web server Apache Tomcat.
 - workspace_gruppo_giallo: contenente l'archivio della workspace del progetto sviluppato.
 - WSDL: contenente le interfacce aggiornate tra i sistemi (WSDL dei WS) per tutti i processi previsti.
+- xsd: contenente il file .xsd per il controllo batch del formato della notizia.
