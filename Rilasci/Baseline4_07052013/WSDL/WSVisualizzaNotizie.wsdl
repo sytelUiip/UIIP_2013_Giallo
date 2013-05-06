@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://visualizzalistanotizie.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax211="http://entity.gruppogiallo.it/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://visualizzalistanotizie.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax212="http://entity.gruppogiallo.it/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://visualizzalistanotizie.gruppogiallo.it">
+            <xs:import namespace="http://entity.gruppogiallo.it/xsd"/>
+            <xs:element name="ricercaNotiziePerTitolo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="minLimit" type="xs:int"/>
+                        <xs:element minOccurs="0" name="maxLimit" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricercaNotiziePerTitoloResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax212:Notizia"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricercaNotiziePerStato">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="stato" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="minLimit" type="xs:int"/>
+                        <xs:element minOccurs="0" name="maxLimit" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricercaNotiziePerStatoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax212:Notizia"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricercaNotiziePerAutore">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="autore" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="minLimit" type="xs:int"/>
+                        <xs:element minOccurs="0" name="maxLimit" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricercaNotiziePerAutoreResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax212:Notizia"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="listaNotizie">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="minLimit" type="xs:int"/>
+                        <xs:element minOccurs="0" name="maxLimit" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="listaNotizieResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax212:Notizia"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entity.gruppogiallo.it/xsd">
+            <xs:complexType name="DTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Notizia">
+                <xs:complexContent>
+                    <xs:extension base="ax211:DTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="autore" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="dataCreazione" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="dataTrasmissione" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="lockNotizia" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="lunghezzaTesto" type="xs:int"/>
+                            <xs:element minOccurs="0" name="sottotitolo" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="stato" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="testo" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="tipologiaNotizia" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="ultimoDigitatore" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="ricercaNotiziePerTitoloRequest">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerTitolo"/>
+    </wsdl:message>
+    <wsdl:message name="ricercaNotiziePerTitoloResponse">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerTitoloResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ricercaNotiziePerStatoRequest">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerStato"/>
+    </wsdl:message>
+    <wsdl:message name="ricercaNotiziePerStatoResponse">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerStatoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="listaNotizieRequest">
+        <wsdl:part name="parameters" element="ns:listaNotizie"/>
+    </wsdl:message>
+    <wsdl:message name="listaNotizieResponse">
+        <wsdl:part name="parameters" element="ns:listaNotizieResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ricercaNotiziePerAutoreRequest">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerAutore"/>
+    </wsdl:message>
+    <wsdl:message name="ricercaNotiziePerAutoreResponse">
+        <wsdl:part name="parameters" element="ns:ricercaNotiziePerAutoreResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSVisualizzaNotiziePortType">
+        <wsdl:operation name="ricercaNotiziePerTitolo">
+            <wsdl:input message="ns:ricercaNotiziePerTitoloRequest" wsaw:Action="urn:ricercaNotiziePerTitolo"/>
+            <wsdl:output message="ns:ricercaNotiziePerTitoloResponse" wsaw:Action="urn:ricercaNotiziePerTitoloResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerStato">
+            <wsdl:input message="ns:ricercaNotiziePerStatoRequest" wsaw:Action="urn:ricercaNotiziePerStato"/>
+            <wsdl:output message="ns:ricercaNotiziePerStatoResponse" wsaw:Action="urn:ricercaNotiziePerStatoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listaNotizie">
+            <wsdl:input message="ns:listaNotizieRequest" wsaw:Action="urn:listaNotizie"/>
+            <wsdl:output message="ns:listaNotizieResponse" wsaw:Action="urn:listaNotizieResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerAutore">
+            <wsdl:input message="ns:ricercaNotiziePerAutoreRequest" wsaw:Action="urn:ricercaNotiziePerAutore"/>
+            <wsdl:output message="ns:ricercaNotiziePerAutoreResponse" wsaw:Action="urn:ricercaNotiziePerAutoreResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSVisualizzaNotizieSoap11Binding" type="ns:WSVisualizzaNotiziePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="ricercaNotiziePerTitolo">
+            <soap:operation soapAction="urn:ricercaNotiziePerTitolo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerStato">
+            <soap:operation soapAction="urn:ricercaNotiziePerStato" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerAutore">
+            <soap:operation soapAction="urn:ricercaNotiziePerAutore" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listaNotizie">
+            <soap:operation soapAction="urn:listaNotizie" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSVisualizzaNotizieSoap12Binding" type="ns:WSVisualizzaNotiziePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="ricercaNotiziePerTitolo">
+            <soap12:operation soapAction="urn:ricercaNotiziePerTitolo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerStato">
+            <soap12:operation soapAction="urn:ricercaNotiziePerStato" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerAutore">
+            <soap12:operation soapAction="urn:ricercaNotiziePerAutore" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listaNotizie">
+            <soap12:operation soapAction="urn:listaNotizie" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSVisualizzaNotizieHttpBinding" type="ns:WSVisualizzaNotiziePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="ricercaNotiziePerTitolo">
+            <http:operation location="ricercaNotiziePerTitolo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerStato">
+            <http:operation location="ricercaNotiziePerStato"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ricercaNotiziePerAutore">
+            <http:operation location="ricercaNotiziePerAutore"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listaNotizie">
+            <http:operation location="listaNotizie"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSVisualizzaNotizie">
+        <wsdl:port name="WSVisualizzaNotizieHttpSoap11Endpoint" binding="ns:WSVisualizzaNotizieSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSVisualizzaNotizie.WSVisualizzaNotizieHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSVisualizzaNotizieHttpSoap12Endpoint" binding="ns:WSVisualizzaNotizieSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSVisualizzaNotizie.WSVisualizzaNotizieHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSVisualizzaNotizieHttpEndpoint" binding="ns:WSVisualizzaNotizieHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSVisualizzaNotizie.WSVisualizzaNotizieHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
