@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://cancellanotizia.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://cancellanotizia.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://cancellanotizia.gruppogiallo.it">
+            <xs:element name="cancellaNotizia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancellaNotiziaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="cancellaNotiziaRequest">
+        <wsdl:part name="parameters" element="ns:cancellaNotizia"/>
+    </wsdl:message>
+    <wsdl:message name="cancellaNotiziaResponse">
+        <wsdl:part name="parameters" element="ns:cancellaNotiziaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSCancellaNotiziaPortType">
+        <wsdl:operation name="cancellaNotizia">
+            <wsdl:input message="ns:cancellaNotiziaRequest" wsaw:Action="urn:cancellaNotizia"/>
+            <wsdl:output message="ns:cancellaNotiziaResponse" wsaw:Action="urn:cancellaNotiziaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSCancellaNotiziaSoap11Binding" type="ns:WSCancellaNotiziaPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="cancellaNotizia">
+            <soap:operation soapAction="urn:cancellaNotizia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSCancellaNotiziaSoap12Binding" type="ns:WSCancellaNotiziaPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="cancellaNotizia">
+            <soap12:operation soapAction="urn:cancellaNotizia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSCancellaNotiziaHttpBinding" type="ns:WSCancellaNotiziaPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="cancellaNotizia">
+            <http:operation location="cancellaNotizia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSCancellaNotizia">
+        <wsdl:port name="WSCancellaNotiziaHttpSoap11Endpoint" binding="ns:WSCancellaNotiziaSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSCancellaNotizia.WSCancellaNotiziaHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSCancellaNotiziaHttpSoap12Endpoint" binding="ns:WSCancellaNotiziaSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSCancellaNotizia.WSCancellaNotiziaHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSCancellaNotiziaHttpEndpoint" binding="ns:WSCancellaNotiziaHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSCancellaNotizia.WSCancellaNotiziaHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

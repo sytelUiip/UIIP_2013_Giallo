@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://trasmettinotizia.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://trasmettinotizia.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://trasmettinotizia.gruppogiallo.it">
+            <xs:element name="trasmettiNotizia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="loggedAccountUsername" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="loggedAccountPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="trasmettiNotiziaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="trasmettiNotiziaRequest">
+        <wsdl:part name="parameters" element="ns:trasmettiNotizia"/>
+    </wsdl:message>
+    <wsdl:message name="trasmettiNotiziaResponse">
+        <wsdl:part name="parameters" element="ns:trasmettiNotiziaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSTrasmettiNotiziaPortType">
+        <wsdl:operation name="trasmettiNotizia">
+            <wsdl:input message="ns:trasmettiNotiziaRequest" wsaw:Action="urn:trasmettiNotizia"/>
+            <wsdl:output message="ns:trasmettiNotiziaResponse" wsaw:Action="urn:trasmettiNotiziaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSTrasmettiNotiziaSoap11Binding" type="ns:WSTrasmettiNotiziaPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="trasmettiNotizia">
+            <soap:operation soapAction="urn:trasmettiNotizia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSTrasmettiNotiziaSoap12Binding" type="ns:WSTrasmettiNotiziaPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="trasmettiNotizia">
+            <soap12:operation soapAction="urn:trasmettiNotizia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSTrasmettiNotiziaHttpBinding" type="ns:WSTrasmettiNotiziaPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="trasmettiNotizia">
+            <http:operation location="trasmettiNotizia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSTrasmettiNotizia">
+        <wsdl:port name="WSTrasmettiNotiziaHttpSoap11Endpoint" binding="ns:WSTrasmettiNotiziaSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSTrasmettiNotizia.WSTrasmettiNotiziaHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSTrasmettiNotiziaHttpSoap12Endpoint" binding="ns:WSTrasmettiNotiziaSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSTrasmettiNotizia.WSTrasmettiNotiziaHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSTrasmettiNotiziaHttpEndpoint" binding="ns:WSTrasmettiNotiziaHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSTrasmettiNotizia.WSTrasmettiNotiziaHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

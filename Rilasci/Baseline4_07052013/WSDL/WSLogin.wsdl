@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://login.gruppogiallo.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://entity.gruppogiallo.it/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://login.gruppogiallo.it">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entity.gruppogiallo.it/xsd">
+            <xs:complexType name="DTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Account">
+                <xs:complexContent>
+                    <xs:extension base="ax23:DTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="cognome" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="gruppi" nillable="true" type="ax23:Gruppo"/>
+                            <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="siglaGiornalista" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="siglaRedazione" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="stato" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="Gruppo">
+                <xs:complexContent>
+                    <xs:extension base="ax23:DTO">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="accounts" nillable="true" type="ax23:Account"/>
+                            <xs:element minOccurs="0" name="nomeGruppo" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax24="http://entity.gruppogiallo.it/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://login.gruppogiallo.it">
+            <xs:import namespace="http://entity.gruppogiallo.it/xsd"/>
+            <xs:element name="getLogin">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLoginResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax23:Account"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getLoginRequest">
+        <wsdl:part name="parameters" element="ns:getLogin"/>
+    </wsdl:message>
+    <wsdl:message name="getLoginResponse">
+        <wsdl:part name="parameters" element="ns:getLoginResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WSLoginPortType">
+        <wsdl:operation name="getLogin">
+            <wsdl:input message="ns:getLoginRequest" wsaw:Action="urn:getLogin"/>
+            <wsdl:output message="ns:getLoginResponse" wsaw:Action="urn:getLoginResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSLoginSoap11Binding" type="ns:WSLoginPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getLogin">
+            <soap:operation soapAction="urn:getLogin" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSLoginSoap12Binding" type="ns:WSLoginPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getLogin">
+            <soap12:operation soapAction="urn:getLogin" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WSLoginHttpBinding" type="ns:WSLoginPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getLogin">
+            <http:operation location="getLogin"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSLogin">
+        <wsdl:port name="WSLoginHttpSoap11Endpoint" binding="ns:WSLoginSoap11Binding">
+            <soap:address location="http://localhost:8080/BusinessLogic/services/WSLogin.WSLoginHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSLoginHttpSoap12Endpoint" binding="ns:WSLoginSoap12Binding">
+            <soap12:address location="http://localhost:8080/BusinessLogic/services/WSLogin.WSLoginHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WSLoginHttpEndpoint" binding="ns:WSLoginHttpBinding">
+            <http:address location="http://localhost:8080/BusinessLogic/services/WSLogin.WSLoginHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
